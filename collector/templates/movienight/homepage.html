@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<script src="{% static 'main.js' %}"></script>
+{% endblock head %}
+
+
+{% block header %}
+<div class="flex justify-end">
+    <form action="" class="relative">
+        <input type="search" 
+            class="peer cursor-pointer relative z-10 h-12 w-12 rounded-full border bg-transparent pl-12 outline-none text-white focus:w-full focus:cursor-text focus:border-transparent focus:pl-16 focus:pr-4 focus:ring-2 focus:ring-white" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-y-0 my-auto h-8 w-12 border-r border-transparent stroke-gray-500 px-3.5 peer-focus:border-white peer-focus:stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+    </form>
+  </div>
+{% endblock header %}
+    
+{% block title %}
+    MovieTonight
+{% endblock title %}
+{% block body %}
+<div class="genres-container">
+    <h2 class="genres-title">Genres</h2>
+    <div id="genres-selection">
+        {% for genre in genres %}
+        <button class="genre-button">{{ genre.name }}</button>
+        {% endfor %}
+    </div>
+</div>
+<button id="Load-button" style="display: none;">Load movie</button>
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray py-6 sm:py-12">
+    <div class="mx-auto max-w-screen-xl px-4 w-full">
+        <h2 class="mb-4 font-bold text-3xl text-white ">Movies</h2>
+        <div class="absolute right-20 top-0">
+            <div @click.away="openSort = false" class="relative" x-data="{ openSort: false,sortType:'Sort by' }">
+                <button @click="openSort = !openSort" class="flex  text-white bg-gray-60 items-center justify-start w-40  py-2 mt-2 text-xl font-semibold text-left bg-transparent rounded-lg ">
+                    <span x-text="sortType"></span>
+                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': openSort, 'rotate-0': !openSort}" class="w-4 h-4  transition-transform duration-200 transform "><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  </button>
+                  <div x-show="openSort" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-50 w-full  origin-top-right">
+                    <div class="px-2 pt-2 pb-2 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
+                      <div class="flex flex-col">
+                        <a @click="sortType='Title', changeSort('Title')" x-show="sortType != 'Title'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Title">
+                            <p class="font-semibold">Title</p>
+                        </a>
+                        <a @click="sortType='Release_date',changeSort('Release_date')" x-show="sortType != 'Release_date'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Release_date">
+                            <p class="font-semibold">Most recent</p>
+                        </a>
+                        <a @click="sortType='Popularity',changeSort('Popularity')" x-show="sortType != 'Popularity'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Popularity">
+                            <p class="font-semibold">Popularity</p>
+                        </a>
+                        <a @click="sortType='rating',changeSort('rating')" x-show="sortType != 'rating'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="rating">
+                            <p class="font-semibold">rating</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div id="movies-container" class="grid w-full sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {% for movie in movies %}
+            <a href="{% url 'movieDetail:movie_detail' movie.title|slugify movie.TMDB_id %}">
+                <div class="movie-card relative flex flex-col shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 max-w-md">
+                <div style="height: 300px; overflow: hidden;">
+                    <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width:100%; height:100%; object-fit:fit;"class="movie-poster">
+                </div>
+                <div class="bg-white py-4 px-3">
+                    <h3 class="text-2xl mb-2 font-medium">{{ movie.title }}</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="text-sm text-gray-600 genre-list">
+                            {% for genre in movie.genres.all %}
+                            {{ genre.name }}
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    </div>
+                    <div class="flex items-center justify-end">
+                        <p class="movie-year text-lg">{{movie.release_date|date:"Y"}}</p>
+                        <img src="{% static 'icon/imdb.png' %}" alt="IMDb Icon" class="w-10 h-5">                    
+                        <span class="ml-1 mr-2 text-lg">
+                            {% if movie.IMDB_rating %}
+                                {{ movie.IMDB_rating }} / 10
+                            {% else %}
+                                0.0 / 00
+                            {% endif %}
+                        </span>                    
+                    </div>
+                </div>
+            </div>
+        </a>
+            {% endfor %}            
+        </div>
+    </div>
+    <button id="show-more-button">Show More</button>
+</div>
+{% endblock body %}
+

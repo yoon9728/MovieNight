@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+    
+{% endblock head %}
+
+
+{% block title %}
+    About
+{% endblock title %}
+
+
+{% block body %}
+<div class="p-8">
+    <div class="p-4 rounded-lg shadow-xl py-8 mt-12">
+        <h4 class="text-4xl font-bold text-white tracking-widest text-center">About</h4>
+        <p class="text-center text-white text-2xl mt-2 mb-5">MovieNight is a Netflix moviere commendation website.</p>
+        <p class="text-center text-white text-lg mt-2">I am currently a university student working hard to become a full-stack developer.</p>
+        <p class="text-center text-white text-lg mt-2">Here is my social media links</p>
+        <div class="flex justify-center mt-4">
+            <img src="{% static 'icon/github.png' %}" alt="Github" class="icon"> 
+            <a href="https://www.linkedin.com/in/jeehyun-yoon-053407171/" target="_blank">
+                <img src="{% static 'icon/linkedin.png' %}" alt="Linkedin" class="icon">
+            </a>
+        </div>                 
+        <div class="space-y-12 px-2 xl:px-16 mt-12">
+            <div class="mt-4 flex">
+                <div>
+                    <div class="flex items-center h-16 border-l-4 border-red-600">
+                        <span class="text-4xl text-red-600 px-4">Q.</span>
+                    </div>
+                    <div class="flex items-center h-16 border-l-4 border-gray-400">
+                        <span class="text-4xl text-gray-400 px-4">A.</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center h-16">
+                        <span class="text-lg text-red-600 font-bold">What is purpose of the MovieNight?</span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <span class="text-white">Whether before bed, during meals, or whenever we have some spare time, we often find ourselves watching Netflix. To facilitate this, our website quickly helps users find movies in their preferred genre or choose a movie swiftly through the "Today's Pick" feature.</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 flex">
+                <div>
+                    <div class="flex items-center h-16 border-l-4 border-red-600">
+                        <span class="text-4xl text-red-600 px-4">Q.</span>
+                    </div>
+                    <div class="flex items-center h-16 border-l-4 border-gray-400">
+                        <span class="text-4xl text-gray-400 px-4">A.</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center h-16">
+                        <span class="text-lg text-red-600 font-bold">How are movie recommendations made on MovieNight?
+                        </span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <span class="text-white">Movie recommendations on MovieNight are made through the TMDB API.</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 flex">
+                <div>
+                    <div class="flex items-center h-16 border-l-4 border-red-600">
+                        <span class="text-4xl text-red-600 px-4">Q.</span>
+                    </div>
+                    <div class="flex items-center h-16 border-l-4 border-gray-400">
+                        <span class="text-4xl text-gray-400 px-4">A.</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center h-16">
+                        <span class="text-lg text-red-600 font-bold">What are the future plans for MovieNight?</span>
+                    </div>
+                    <div class="flex items-center py-2">
+                        <span class="text-white">In the future, we plan to expand our offerings to include TV series as well and introduce a "like" feature to provide insights into user preferences on the site. We will also add a login feature to offer more personalized information to logged-in users. Based on the information provided by users, we will be able to offer a more accurate list of recommendations.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+    
