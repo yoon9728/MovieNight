@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'icon/favicon.png' %}">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="{% static 'output.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -66,7 +66,5 @@
     {% block body %}
         Base file in here
     {% endblock body %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-
 </body>
 </html>

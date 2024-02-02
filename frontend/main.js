@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    function changeSort(sortType) {
+        currentSort = sortType;
+        loadMovies();
+    }
+
     const loadButton = document.getElementById('Load-button');
     if (loadButton) {
         loadButton.addEventListener('click', function() {
@@ -36,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadMovies();
         });
     }
+
 
     const showMoreButton = document.getElementById('show-more-button');
     if (showMoreButton) {

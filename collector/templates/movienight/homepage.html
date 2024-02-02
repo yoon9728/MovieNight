@@ -44,16 +44,16 @@
                   <div x-show="openSort" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-50 w-full  origin-top-right">
                     <div class="px-2 pt-2 pb-2 bg-white rounded-md shadow-lg dark-mode:bg-gray-700">
                       <div class="flex flex-col">
-                        <a @click="sortType='Title', changeSort('Title')" x-show="sortType != 'Title'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Title">
+                        <a @click="sortType='Title'" x-show="sortType != 'Title'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Title">
                             <p class="font-semibold">Title</p>
                         </a>
-                        <a @click="sortType='Release_date',changeSort('Release_date')" x-show="sortType != 'Release_date'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Release_date">
+                        <a @click="sortType='Release_date'" x-show="sortType != 'Release_date'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Release_date">
                             <p class="font-semibold">Most recent</p>
                         </a>
-                        <a @click="sortType='Popularity',changeSort('Popularity')" x-show="sortType != 'Popularity'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Popularity">
+                        <a @click="sortType='Popularity'" x-show="sortType != 'Popularity'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="Popularity">
                             <p class="font-semibold">Popularity</p>
                         </a>
-                        <a @click="sortType='rating',changeSort('rating')" x-show="sortType != 'rating'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="rating">
+                        <a @click="sortType='rating'" x-show="sortType != 'rating'" class="flex flex-row items-start rounded-lg bg-transparent p-2 hover:bg-gray-200" href="#" data-sort="rating">
                             <p class="font-semibold">rating</p>
                         </a>
                       </div>
