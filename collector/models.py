@@ -33,7 +33,7 @@ class Movie(models.Model):
     popularity = models.IntegerField(null=True)
     IMDB_id = models.CharField(max_length=100, null=True)
     IMDB_rating = models.CharField(max_length=100, null=True)
-    overview = models.CharField(max_length=700, null=True)
+    overview = models.CharField(max_length=3000, null=True)
     lead_actors = models.ManyToManyField(Actor) 
     runtime = models.CharField(max_length=50, null=True)
     trailer_url = models.URLField(null=True)
