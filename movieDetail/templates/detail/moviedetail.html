@@ -14,12 +14,12 @@
     </div>
     <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
       <div class="border-b border-gray-200 pb-6">
-        <h1 class="text-xl md:text-3xl lg:text-5xl font-semibold lg:leading-11 leading-7 text-gray-800 dark:text-white mt-2 mb-7 border-b-4 border-red-500 pb-4">
+        <h1 class="text-xl md:text-3xl lg:text-5xl font-semibold lg:leading-11 leading-7 dark:text-white mt-2 mb-7 border-b-4 border-red-500 pb-4">
             {{ movie.title }}
-            <span class="text-lg md:text-2xl lg:text-3xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white"> ({{ movie.release_date|date:"Y" }})</span>
+            <span class="text-lg md:text-2xl lg:text-3xl font-semibold lg:leading-6 leading-7 dark:text-white"> ({{ movie.release_date|date:"Y" }})</span>
         </h1>             
-        <p class="xl:pr-48 text-3xl font-bold lg:leading-tight leading-normal text-gray-600 dark:text-gray-300 mt-7">Overview:</p>
-        <p class="xl:pr-70 text-xl lg:leading-tight leading-normal text-gray-600 dark:text-gray-300 mt-3 mb-7">{{movie.overview}}</p>
+        <p class="xl:pr-48 text-3xl font-bold lg:leading-tight leading-normal text-white mt-7">Overview:</p>
+        <p class="xl:pr-70 text-xl lg:leading-tight leading-normal text-white mt-3 mb-7">{{movie.overview}}</p>
         <div class="grid-cols-2 flex group justify-between mb-5">
             <div class="font-black flex flex-row items-center">
                 <img src="{% static 'icon/imdb.png' %}" alt="IMDb Icon" class="w-10 h-8 mr-2">
@@ -33,22 +33,22 @@
             </div>
         </div>        
       <div class="py-4 border-b border-gray-200 flex items-center justify-between">
-        <p class="text-2xl leading-4 font-bold text-gray-800 dark:text-gray-300">Genre</p>
+        <p class="text-2xl leading-4 font-bold text-white">Genre</p>
         <div class="flex items-center justify-center">
-          <p class="text-sm leading-none  text-gray-600 dark:text-gray-300 ml-3 mr-4">
+          <p class="text-sm leading-none  text-white ml-3 mr-4">
             {% for genre in movie.genres.all %}
-            <p class="text-lg leading-none text-gray-600 dark:text-gray-300 mr-3">{{ genre.name }}</p>
+            <p class="text-lg leading-none text-white mr-3">{{ genre.name }}</p>
         {% endfor %}
         </p>
         </div>
       </div>
       <div class="py-4 border-b border-gray-200 flex items-center justify-between">
-        <p class="text-2xl leading-4 font-bold text-gray-800 dark:text-gray-300">Running time</p>
-        <p class="text-lg leading-none text-gray-600 dark:text-gray-300 mr-3">{{ movie.runtime }} mins</p>
+        <p class="text-2xl leading-4 font-bold text-white">Running time</p>
+        <p class="text-lg leading-none text-white mr-3">{{ movie.runtime }} mins</p>
     </div>
       <div>
         <div class="py-4 border-gray-200 flex items-center justify-between">
-            <p class="text-2xl leading-4 font-bold text-gray-800 dark:text-gray-300">Crews</p>
+            <p class="text-2xl leading-4 font-bold text-white">Crews</p>
         </div>
         <div class="profile-container mt-1 flex items-center justify-between">
             <div class="profiles"style="position: relative; width: 90%; height: 50%;">
@@ -60,13 +60,13 @@
                         {% else %}
                             <img src="{% static 'icon/favicon.png' %}" alt="Default Icon" class="image-card w-auto h-52 object-cover rounded-lg">
                         {% endif %}                        <p class="bg-black font-bold text-white">{{ movie.director.name }}</p>
-                        <p class="text-xs text-gray-300">DIRECTOR</p>
+                        <p class="text-xs text-white">DIRECTOR</p>
                     </div>               
                 {% for actor in movie.lead_actors.all  %}
                     <div id="actor-{{ actor.id }}" class="actor-card">
                         <img src="{{ actor.profile_image }}" alt="Profile Image" class="image-card w-auto h-52 object-cover rounded-lg">
                         <p class="bg-black font-bold text-white">{{ actor.name }}</p>
-                        <p class="text-xs text-gray-300">ACTOR</p>
+                        <p class="text-xs text-white">ACTOR</p>
                     </div>
                 {% endfor %}
                 <div>
@@ -74,9 +74,9 @@
         </div>
       </div>
     </div>
-    <p class="text-2xl border-t border-gray-200 leading-10 font-bold text-gray-800 dark:text-gray-300">Trailer</p>
+    <p class="text-2xl border-t border-gray-200 leading-10 font-bold text-white">Trailer</p>
     <div class="py-4 flex items-center justify-between">
-      <div class="text-lg  leading-none text-gray-600 dark:text-gray-300 mr-3">
+      <div class="text-lg  leading-none text-white mr-3">
           <iframe width="560" height="315" src="{{ movie.trailer_url }}" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
