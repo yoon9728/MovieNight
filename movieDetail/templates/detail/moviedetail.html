@@ -42,7 +42,7 @@
           <p class="text-sm leading-none text-white ml-3 mr-4">
             {% for genre in movie.genres.all %}
                 <span class="text-lg leading-none text-white mr-3">
-                    {{ genre.name }}{% if not forloop.last %} | {% endif %}
+                    {{ genre.name }}{% if not forloop.last %} |{% endif %}
                 </span>
             {% endfor %}
         </p>
