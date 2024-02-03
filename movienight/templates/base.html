@@ -23,62 +23,51 @@
     <title>{% block title %}Your Website Title{% endblock title %}</title>
 </head>
 <body x-data="navigation">
-    <header class="bg-black my-6">
+    <header class="bg-black fixed top-0 left-0 w-full z-50">
       <div class="min-h-full">
         <nav class="bg-black-800">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
               <div class="flex items-center">
-                <a href="/" class="text-white">
-                  <img src="{% static 'icon/favicon.png' %}" alt="logo" class="h-12 w-12">
-                </a>
-                <div class="hidden md:block">
-                  <div class="ml-10 flex items-baseline space-x-4">
-                    <!-- Desktop Navigation Links -->
-                    <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="{% url 'collector:todaysPick' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Today's Pick</a>
-                    <a href="{% url 'collector:about' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
-                  </div>
+                <!-- Logo and mobile menu button -->
+                <div class="flex justify-between w-full md:w-auto">
+                  <a href="/" class="text-white">
+                    <img src="{% static 'icon/favicon.png' %}" alt="logo" class="h-12 w-12">
+                  </a>
+                  <!-- Mobile Menu Button -->
+                  <button @click="isGenreOpen = !isGenreOpen" class="text-white md:hidden">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                  </button>
                 </div>
-                <!-- Mobile Menu Button -->
-                <button @click="isOpen = !isOpen" class="text-white md:hidden">
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                  </svg>
-                </button>
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex ml-10 space-x-4">
+                  <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                  <a href="{% url 'collector:todaysPick' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Today's Pick</a>
+                  <a href="{% url 'collector:about' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
+                </div>
               </div>
-              <!-- Mobile Navigation Menu -->
-              <div x-show="isOpen" class="absolute top-16 left-0 w-full bg-black-800 md:hidden">
-                <a href="/" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Home</a>
-                <a href="{% url 'collector:todaysPick' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Today's Pick</a>
-                <a href="{% url 'collector:about' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">About</a>
+              <!-- Desktop Search Bar - Shown only on desktop -->
+              <div class="hidden md:block">
+                <!-- Include your search bar here -->
               </div>
-              {% block header %}
-                <!-- Search bar or other header content goes here -->
-              {% endblock header %}
             </div>
         </nav>
+        <!-- Mobile Genre Selection Sidebar - Shown only on mobile -->
+        <div x-show.transition="isGenreOpen" class="md:hidden fixed inset-0 z-40 bg-black bg-opacity-75">
+          <aside class="relative z-50 h-full w-64 overflow-y-auto bg-black p-4">
+            <h2 class="text-white text-lg font-semibold mb-2">Genres</h2>
+            <!-- Include your genre selection list here -->
+            <button @click="loadMovies" class="mt-4 w-full bg-red-500 text-white py-2 rounded">Load Movies</button>
+          </aside>
+        </div>
       </div>
     </header>
-    <hr>
-    <!-- Genre Selection Button for Mobile -->
-    <div class="md:hidden px-4">
-      <button @click="isGenreOpen = !isGenreOpen" class="py-2 px-4 bg-gray-800 text-white rounded-md">
-        Select Genre
-        <svg class="inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      <!-- Genre Selection Menu for Mobile -->
-      <div x-show="isGenreOpen" class="py-2">
-        <!-- Dynamically populated genres list -->
-        {% for genre in genres %}
-          <button class="block text-gray-800 hover:bg-gray-200 rounded-md px-3 py-2 text-sm">{{ genre.name }}</button>
-        {% endfor %}
-      </div>
+    <div class="pt-16"> <!-- This div is to push the content down below the fixed header -->
+      {% block body %}
+          <!-- Main content goes here -->
+      {% endblock body %}
     </div>
-    {% block body %}
-        <!-- Main content goes here -->
-    {% endblock body %}
 </body>
 </html>
