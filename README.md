@@ -27,6 +27,9 @@ Stay tuned for more updates and happy movie watching!
 - All movie lovers who inspire us to improve MovieNight.
 
 
-https://github.com/yoon9728/movienight/assets/55475705/56224f12-ffb1-4c4a-bd0b-1663892cdf38
+
+
+https://github.com/yoon9728/MovieNight/assets/55475705/b3f69200-c465-413a-8f3c-d1fc732291ad
+
 
 
