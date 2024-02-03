@@ -69,9 +69,9 @@
                     <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width:100%; height:100%; object-fit:fit;"class="movie-poster">
                 </div>
                 <div class="bg-white py-4 px-3">
-                    <h3 class="text-2xl mb-2 font-medium">{{ movie.title }}</h3>
+                    <h3 class="text-2xl mb-2 font-bold">{{ movie.title }}</h3>
                     <div class="flex justify-between items-center mb-4">
-                        <p class="text-sm text-gray-600 genre-list">
+                        <p class="text-sm font-bold text-gray-600 genre-list">
                             {% for genre in movie.genres.all %}
                             {{ genre.name }}
                             {% if not forloop.last %}, {% endif %}
