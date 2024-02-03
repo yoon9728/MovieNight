@@ -1,7 +1,6 @@
 {% load static %} 
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,59 +9,76 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('navigation', () => ({
+          isOpen: false,
+          isGenreOpen: false
+        }));
+      });
+    </script>
     {% block head %}
-      head hear
+      <!-- Additional head content can be placed here -->
     {% endblock head %}
-      
-    <title>
-    {% block title %}
-        title
-    {% endblock title %}
-    </title>
+    <title>{% block title %}Your Website Title{% endblock title %}</title>
 </head>
-<body>
+<body x-data="navigation">
     <header class="bg-black my-6">
       <div class="min-h-full">
         <nav class="bg-black-800">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
               <div class="flex items-center">
-                
                 <a href="/" class="text-white">
                   <img src="{% static 'icon/favicon.png' %}" alt="logo" class="h-12 w-12">
                 </a>
-
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="/"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >Home
-                    </a>
-                    <a href="{% url 'collector:todaysPick' %}"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >Today's Pick</a
-                    >
-                    <a
-                    href="{% url 'collector:about' %}"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >About</a
-                   >
+                    <!-- Desktop Navigation Links -->
+                    <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="{% url 'collector:todaysPick' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Today's Pick</a>
+                    <a href="{% url 'collector:about' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
                   </div>
                 </div>
+                <!-- Mobile Menu Button -->
+                <button @click="isOpen = !isOpen" class="text-white md:hidden">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                  </svg>
+                </button>
               </div>
-              
+              <!-- Mobile Navigation Menu -->
+              <div x-show="isOpen" class="absolute top-16 left-0 w-full bg-black-800 md:hidden">
+                <a href="/" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Home</a>
+                <a href="{% url 'collector:todaysPick' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Today's Pick</a>
+                <a href="{% url 'collector:about' %}" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">About</a>
+              </div>
               {% block header %}
-                
+                <!-- Search bar or other header content goes here -->
               {% endblock header %}
-                
             </div>
         </nav>
       </div>
     </header>
-      <hr>
+    <hr>
+    <!-- Genre Selection Button for Mobile -->
+    <div class="md:hidden px-4">
+      <button @click="isGenreOpen = !isGenreOpen" class="py-2 px-4 bg-gray-800 text-white rounded-md">
+        Select Genre
+        <svg class="inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <!-- Genre Selection Menu for Mobile -->
+      <div x-show="isGenreOpen" class="py-2">
+        <!-- Dynamically populated genres list -->
+        {% for genre in genres %}
+          <button class="block text-gray-800 hover:bg-gray-200 rounded-md px-3 py-2 text-sm">{{ genre.name }}</button>
+        {% endfor %}
+      </div>
+    </div>
     {% block body %}
-        Base file in here
+        <!-- Main content goes here -->
     {% endblock body %}
 </body>
 </html>
