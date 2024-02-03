@@ -43,7 +43,7 @@ class HomePage(ListView):
         elif sort == 'rating':
             queryset = Movie.objects.all().order_by('-IMDB_rating')
         else:
-            queryset = Movie.objects.all()  # 기본 순서
+            queryset = Movie.objects.all().order_by('-popularity')
 
         return queryset
 

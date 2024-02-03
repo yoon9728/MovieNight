@@ -1,6 +1,6 @@
 let selectedGenres = [];
 let currentPage = 1;
-let currentSort = 'Popularity';
+let currentSort = '';
 let searchQuery = '';
 
 document.addEventListener('DOMContentLoaded', function() {
