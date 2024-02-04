@@ -22,13 +22,14 @@ DJANGO_ENV = os.environ.get('DJANGO_ENV', 'deveopment')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-zbp@aii(7r4rxse7w%g421)xe&z4zdb2mhove4rz$alx%%a$&p"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '44.204.147.139', 'localhost', '127.0.0.1'
+    '44.204.147.139',
+    'movie-night.ca'
 ]
 
 
